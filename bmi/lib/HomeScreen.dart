@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,37 +20,21 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                 children: [
                   Expanded(
-                                      child: Container(
-                      margin: EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        color: Color(0xff2b3131),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
+                                      child: ReusableContanier(
+                                        customChild: Container(
+                                          child: Column(
+                                            children: [
+                                              Icon(FontAwesomeIcons.mars, size: 75.0,),
+                                              SizedBox(height: 12),
+                                              Text('MALE',style: TextStyle(fontSize: 18.0),)
+                                            ],
+                                          ),
+                                        ),
+                                        contColor: Color(0xff2b3131),
+                                        ),
                   ),
                   Expanded(
-                                      child: Container(
-                      margin: EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        color: Color(0xff2b3131),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-             Expanded(
-                          child: Row(
-                children: [
-                  Expanded(
-                                      child: Container(
-                      margin: EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        color: Color(0xff2b3131),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
+                                      child: ReusableContanier(contColor: Color(0xff2b3131),),
                   ),
                 ],
               ),
@@ -58,22 +43,19 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                 children: [
                   Expanded(
-                                      child: Container(
-                      margin: EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        color: Color(0xff2b3131),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
+                                      child: ReusableContanier(contColor: Color(0xffb50546),),
+                  ),
+                ],
+              ),
+            ),
+             Expanded(
+                          child: Row(
+                children: [
+                  Expanded(
+                                      child: ReusableContanier(contColor: Color(0xffb50546),),
                   ),
                   Expanded(
-                                      child: Container(
-                      margin: EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        color: Color(0xff2b3131),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
+                                      child: ReusableContanier(contColor: Color(0xffb50546),),
                   ),
                 ],
               ),
@@ -88,5 +70,25 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+class ReusableContanier extends StatelessWidget {
+  
+ReusableContanier({@required this.contColor, this.customChild});
+
+final Color contColor;
+final Widget customChild;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: customChild,
+                      margin: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        color: contColor,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    );
   }
 }
