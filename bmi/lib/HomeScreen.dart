@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
                                       child: ReusableContanier(
                                         customChild: Container(
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Icon(FontAwesomeIcons.mars, size: 75.0,),
                                               SizedBox(height: 12),
@@ -34,7 +35,19 @@ class _HomePageState extends State<HomePage> {
                                         ),
                   ),
                   Expanded(
-                                      child: ReusableContanier(contColor: Color(0xff2b3131),),
+                                      child: ReusableContanier(
+                                        customChild: Container(
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Icon(FontAwesomeIcons.venus, size: 75.0,),
+                                              SizedBox(height: 12),
+                                              Text('FEMALE',style: TextStyle(fontSize: 18.0),)
+                                            ],
+                                          ),
+                                        ),
+                                        contColor: Color(0xff2b3131),
+                                        ),
                   ),
                 ],
               ),
