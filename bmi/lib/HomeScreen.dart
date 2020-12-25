@@ -20,6 +20,8 @@ const kNumberText = TextStyle(
 );
 
 int height = 170;
+int weight = 60;
+int age = 19;
 
 Gender selectedGender;
 
@@ -157,11 +159,57 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: ReusableContanier(
+                      customChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('WEIGHT', style: kLabelText,),
+                          Text(weight.toString(), style: kNumberText,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.minus, onPress: (){
+                                setState(() {
+                                  weight--;
+                                });
+                              },),
+                              SizedBox(width: 10.0,),
+                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.plus, onPress: (){
+                                setState(() {
+                                  weight++;
+                                });
+                              },),
+                            ],
+                          ),
+                        ],
+                      ),
                       contColor: kactiveColor,
                     ),
                   ),
                   Expanded(
                     child: ReusableContanier(
+                       customChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('AGE', style: kLabelText,),
+                          Text(age.toString(), style: kNumberText,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.minus, onPress: (){
+                                setState(() {
+                                  age--;
+                                });
+                              },),
+                              SizedBox(width: 10.0,),
+                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.plus, onPress: (){
+                                setState(() {
+                                  age++;
+                                });
+                              },),
+                            ],
+                          ),
+                        ],
+                      ),
                       contColor: kactiveColor,
                     ),
                   ),
@@ -178,6 +226,27 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+class ButtonPlusMinus extends StatelessWidget {
+  ButtonPlusMinus({this.buttonIcon, this.onPress});
+  final IconData buttonIcon;
+  final Function onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(buttonIcon),
+      onPressed: onPress,
+      fillColor: kinactiveColor,
+      constraints: BoxConstraints.tightFor(
+        height: 44.0,
+        width: 44.0,
+      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0),),
+
+      );
   }
 }
 
