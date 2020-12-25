@@ -217,6 +217,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
+              child: Center(child: Text('Calculate Results', style: TextStyle(fontSize: 25.0),)),
               height: 75.0,
               width: double.infinity,
               margin: EdgeInsets.only(top: 18.0),
