@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+const kactiveColor = Color(0xffb50546);
+const kinactiveColor = Color(0xff2b3131);
+
+const female = kinactiveColor;
+const male = kinactiveColor;
+
+enum Gender{
+  male,
+  female,
+}
+
+Gender selectedGender;
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -21,6 +34,11 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                                       child: ReusableContanier(
+                                        otp: (){
+                                          setState(() {
+                                            selectedGender=Gender.male;
+                                          });
+                                        },
                                         customChild: Container(
                                           child: Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
@@ -31,11 +49,14 @@ class _HomePageState extends State<HomePage> {
                                             ],
                                           ),
                                         ),
-                                        contColor: Color(0xff2b3131),
+                                        contColor: selectedGender==Gender.male?kactiveColor:kinactiveColor,
                                         ),
                   ),
                   Expanded(
                                       child: ReusableContanier(
+                                        otp: (){
+                                          selectedGender=Gender.female;
+                                        },
                                         customChild: Container(
                                           child: Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                                             ],
                                           ),
                                         ),
-                                        contColor: Color(0xff2b3131),
+                                        contColor: selectedGender==Gender.female?kactiveColor:kinactiveColor,
                                         ),
                   ),
                 ],
@@ -56,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                 children: [
                   Expanded(
-                                      child: ReusableContanier(contColor: Color(0xffb50546),),
+                                      child: ReusableContanier(contColor: kactiveColor,),
                   ),
                 ],
               ),
@@ -65,10 +86,10 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                 children: [
                   Expanded(
-                                      child: ReusableContanier(contColor: Color(0xffb50546),),
+                                      child: ReusableContanier(contColor: kactiveColor,),
                   ),
                   Expanded(
-                                      child: ReusableContanier(contColor: Color(0xffb50546),),
+                                      child: ReusableContanier(contColor: kactiveColor,),
                   ),
                 ],
               ),
@@ -88,20 +109,24 @@ class _HomePageState extends State<HomePage> {
 
 class ReusableContanier extends StatelessWidget {
   
-ReusableContanier({@required this.contColor, this.customChild});
+ReusableContanier({@required this.contColor, this.customChild, this.otp});
 
 final Color contColor;
 final Widget customChild;
+final Function otp;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: customChild,
-                      margin: EdgeInsets.all(15.0),
-                      decoration: BoxDecoration(
-                        color: contColor,
-                        borderRadius: BorderRadius.circular(15.0),
+    return GestureDetector(
+      onTap: otp,
+          child: Container(
+        child: customChild,
+                        margin: EdgeInsets.all(15.0),
+                        decoration: BoxDecoration(
+                          color: contColor,
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
-                    );
+    );
   }
 }
