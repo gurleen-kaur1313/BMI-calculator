@@ -4,13 +4,22 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 const kactiveColor = Color(0xffb50546);
 const kinactiveColor = Color(0xff2b3131);
 
-const female = kinactiveColor;
-const male = kinactiveColor;
+Color femaleCont = kinactiveColor;
+Color maleCont = kinactiveColor;
 
-enum Gender{
+enum Gender {
   male,
   female,
 }
+
+const kLabelText = TextStyle(fontSize: 18.0);
+
+const kNumberText = TextStyle(
+  fontSize: 45.0,
+  fontWeight: FontWeight.bold,
+);
+
+int height = 170;
 
 Gender selectedGender;
 
@@ -30,66 +39,128 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Expanded(
-                          child: Row(
+              child: Row(
                 children: [
                   Expanded(
-                                      child: ReusableContanier(
-                                        otp: (){
-                                          setState(() {
-                                            selectedGender=Gender.male;
-                                          });
-                                        },
-                                        customChild: Container(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Icon(FontAwesomeIcons.mars, size: 75.0,),
-                                              SizedBox(height: 12),
-                                              Text('MALE',style: TextStyle(fontSize: 18.0),)
-                                            ],
-                                          ),
-                                        ),
-                                        contColor: selectedGender==Gender.male?kactiveColor:kinactiveColor,
-                                        ),
+                    child: ReusableContanier(
+                      otp: () {
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
+                      },
+                      customChild: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.mars,
+                              size: 75.0,
+                            ),
+                            SizedBox(height: 12),
+                            Text(
+                              'MALE',
+                              style: kLabelText,
+                            ),
+                          ],
+                        ),
+                      ),
+                      contColor: selectedGender == Gender.male
+                          ? kactiveColor
+                          : kinactiveColor,
+                    ),
                   ),
                   Expanded(
-                                      child: ReusableContanier(
-                                        otp: (){
-                                          selectedGender=Gender.female;
-                                        },
-                                        customChild: Container(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Icon(FontAwesomeIcons.venus, size: 75.0,),
-                                              SizedBox(height: 12),
-                                              Text('FEMALE',style: TextStyle(fontSize: 18.0),)
-                                            ],
-                                          ),
-                                        ),
-                                        contColor: selectedGender==Gender.female?kactiveColor:kinactiveColor,
-                                        ),
+                    child: ReusableContanier(
+                      otp: () {
+                        selectedGender = Gender.female;
+                      },
+                      customChild: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.venus,
+                              size: 75.0,
+                            ),
+                            SizedBox(height: 12),
+                            Text(
+                              'FEMALE',
+                              style: kLabelText,
+                            ),
+                          ],
+                        ),
+                      ),
+                      contColor: selectedGender == Gender.female
+                          ? kactiveColor
+                          : kinactiveColor,
+                    ),
                   ),
                 ],
               ),
             ),
-             Expanded(
-                          child: Row(
+            Expanded(
+              child: Row(
                 children: [
                   Expanded(
-                                      child: ReusableContanier(contColor: kactiveColor,),
+                    child: ReusableContanier(
+                      customChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'SELECT HEIGHT',
+                            style: kLabelText,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                height.toString(),
+                                style: kNumberText,
+                              ),
+                              Text('CM', style: kLabelText),
+                            ],
+                          ),
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 16.0),
+                              thumbColor: kinactiveColor,
+                              overlayShape: RoundSliderOverlayShape(overlayRadius: 32.0),
+                              activeTrackColor: Colors.white,
+                              inactiveTrackColor: Colors.yellowAccent,
+                            ),
+                            child: Slider(
+                              value: height.toDouble(),
+                              min: 120.0,
+                              max: 220.0,
+                              onChanged: (double changeHeight) {
+                                setState(() {
+                                  height = changeHeight.round();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      contColor: kactiveColor,
+                    ),
                   ),
                 ],
               ),
             ),
-             Expanded(
-                          child: Row(
+            Expanded(
+              child: Row(
                 children: [
                   Expanded(
-                                      child: ReusableContanier(contColor: kactiveColor,),
+                    child: ReusableContanier(
+                      contColor: kactiveColor,
+                    ),
                   ),
                   Expanded(
-                                      child: ReusableContanier(contColor: kactiveColor,),
+                    child: ReusableContanier(
+                      contColor: kactiveColor,
+                    ),
                   ),
                 ],
               ),
@@ -108,25 +179,24 @@ class _HomePageState extends State<HomePage> {
 }
 
 class ReusableContanier extends StatelessWidget {
-  
-ReusableContanier({@required this.contColor, this.customChild, this.otp});
+  ReusableContanier({@required this.contColor, this.customChild, this.otp});
 
-final Color contColor;
-final Widget customChild;
-final Function otp;
+  final Color contColor;
+  final Widget customChild;
+  final Function otp;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: otp,
-          child: Container(
+      child: Container(
         child: customChild,
-                        margin: EdgeInsets.all(15.0),
-                        decoration: BoxDecoration(
-                          color: contColor,
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
+        margin: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          color: contColor,
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+      ),
     );
   }
 }
