@@ -44,9 +44,8 @@ class _HomePageState extends State<HomePage> {
                   Expanded(
                     child: ReusableContanier(
                       otp: () {
-                        setState(() {
-                          selectedGender = Gender.male;
-                        });
+                        selectedGender = Gender.male;
+                        setState(() {});
                       },
                       customChild: Container(
                         child: Column(
@@ -73,6 +72,7 @@ class _HomePageState extends State<HomePage> {
                     child: ReusableContanier(
                       otp: () {
                         selectedGender = Gender.female;
+                        setState(() {});
                       },
                       customChild: Container(
                         child: Column(
@@ -105,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                     child: ReusableContanier(
                       customChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             'SELECT HEIGHT',
@@ -124,9 +125,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SliderTheme(
                             data: SliderTheme.of(context).copyWith(
-                              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 16.0),
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 16.0),
                               thumbColor: kinactiveColor,
-                              overlayShape: RoundSliderOverlayShape(overlayRadius: 32.0),
+                              overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 32.0),
                               activeTrackColor: Colors.white,
                               inactiveTrackColor: Colors.yellowAccent,
                             ),
