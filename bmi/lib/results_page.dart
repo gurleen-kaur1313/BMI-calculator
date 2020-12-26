@@ -24,6 +24,14 @@ class ResultsPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  resulttext=='Normal'?Image.asset('assets/giphy.gif'):Image.asset('assets/sad.gif'),
+                ],
+              ),
+            ),
+            Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(resulttext, style: TextStyle(fontSize: 45.0),),
                 ],
               ),
@@ -36,14 +44,7 @@ class ResultsPage extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('BMI'),
-                ],
-              ),
-            ),
+            
           ],
         ),
       ),
