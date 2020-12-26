@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'results_page.dart';
+import 'calculatebmi.dart';
 
 const kactiveColor = Color(0xffb50546);
 const kinactiveColor = Color(0xff2b3131);
@@ -162,22 +164,36 @@ class _HomePageState extends State<HomePage> {
                       customChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('WEIGHT', style: kLabelText,),
-                          Text(weight.toString(), style: kNumberText,),
+                          Text(
+                            'WEIGHT',
+                            style: kLabelText,
+                          ),
+                          Text(
+                            weight.toString(),
+                            style: kNumberText,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.minus, onPress: (){
-                                setState(() {
-                                  weight--;
-                                });
-                              },),
-                              SizedBox(width: 10.0,),
-                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.plus, onPress: (){
-                                setState(() {
-                                  weight++;
-                                });
-                              },),
+                              ButtonPlusMinus(
+                                buttonIcon: FontAwesomeIcons.minus,
+                                onPress: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              ButtonPlusMinus(
+                                buttonIcon: FontAwesomeIcons.plus,
+                                onPress: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                              ),
                             ],
                           ),
                         ],
@@ -187,25 +203,39 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     child: ReusableContanier(
-                       customChild: Column(
+                      customChild: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('AGE', style: kLabelText,),
-                          Text(age.toString(), style: kNumberText,),
+                          Text(
+                            'AGE',
+                            style: kLabelText,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kNumberText,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.minus, onPress: (){
-                                setState(() {
-                                  age--;
-                                });
-                              },),
-                              SizedBox(width: 10.0,),
-                              ButtonPlusMinus(buttonIcon: FontAwesomeIcons.plus, onPress: (){
-                                setState(() {
-                                  age++;
-                                });
-                              },),
+                              ButtonPlusMinus(
+                                buttonIcon: FontAwesomeIcons.minus,
+                                onPress: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              ButtonPlusMinus(
+                                buttonIcon: FontAwesomeIcons.plus,
+                                onPress: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              ),
                             ],
                           ),
                         ],
@@ -216,12 +246,25 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Container(
-              child: Center(child: Text('Calculate Results', style: TextStyle(fontSize: 25.0),)),
-              height: 75.0,
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 18.0),
-              color: Color(0xffb50546),
+            GestureDetector(
+              onTap: (){
+                Calculate calc=Calculate(height: height, weight: weight);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(
+                  bmiresult: calc.calculateBMI(),
+                  resulttext: calc.getResult(),
+                )));
+              },
+              child: Container(
+                child: Center(
+                    child: Text(
+                  'Calculate Results',
+                  style: TextStyle(fontSize: 25.0),
+                )),
+                height: 75.0,
+                width: double.infinity,
+                margin: EdgeInsets.only(top: 18.0),
+                color: Color(0xffb50546),
+              ),
             ),
           ],
         ),
@@ -245,9 +288,10 @@ class ButtonPlusMinus extends StatelessWidget {
         height: 44.0,
         width: 44.0,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0),),
-
-      );
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(6.0),
+      ),
+    );
   }
 }
 
